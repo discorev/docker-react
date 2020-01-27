@@ -7,6 +7,9 @@ COPY . .
 RUN npm run build
 
 # production image phase taking the output of the build process
+# the default CMD of nginx starts nginx
 FROM nginx
 COPY --from=builder /app/build /usr/share/nginx/html
-# default CMD of nginx starts nginx
+# NOTE: this does not bind this port, but simply lets other users
+#       know that it is available
+EXPOSE 80
